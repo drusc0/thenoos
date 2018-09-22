@@ -8,17 +8,17 @@ import { HttpService } from '../services/http.service';
 })
 export class HomeComponent implements OnInit {
 
+  inProgress: boolean = true;
+  topHeadlinesData: Object = null;
+
   constructor(private http:HttpService) { }
 
   ngOnInit() {
     this.http.getTopHeadlines()
       .subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err)
-        }
+        data => this.topHeadlinesData = data,
+        err => console.log(err),
+        () => this.inProgress = false
       );
   }
 
