@@ -1,5 +1,11 @@
 <app-navbar></app-navbar>
 
+<div *ngIf="notification && showNotification" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{notification}}</strong>
+  <button type="button" (click)="toggleClose();" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <main role="main" class="container h-100">
   <router-outlet></router-outlet>
 </main>
