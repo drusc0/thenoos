@@ -19,9 +19,9 @@ export class ErrorTestComponent implements OnInit {
   }
 
   // undefined client error
-  fireClientError() {
-    return it.happens;
-  }
+  // fireClientError() {
+  //   return it.happens;
+  // }
 
   fireServerError() {
     this.httpService.get('https://jsonplaceholder.typicode.com/1')

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" [routerLink]="''">
     <img src="../../assets/news_icon.png" width="30" height="30" class="d-inline-block align-top" alt="News Icon">
     The Noos
   </a>
@@ -9,9 +9,9 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="'/'">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="''">Home<span class="sr-only">(current)</span></a>
       </li>
-      <li>
+      <li lass="nav-item">
         <a class="nav-link" [routerLink]="'/errorTest'">Error</a>
       </li>
     </ul>

@@ -14,7 +14,6 @@ export class ErrorsComponent implements OnInit {
 
   ngOnInit() {
     this.routeParams = this.activatedRoute.snapshot;
-    console.log("Params snapshot: ", this.routeParams );
   }
 
 }

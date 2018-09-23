@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,9 @@ export class HttpService {
 
   getTopHeadlines() {
     this.endPoint = "top-headlines";
-    let params = new HttpParams().set('country', 'us').set('apiKey', this.apiKey);
-    return this.http.get(this.url+this.endPoint, {params});
+    let params = new HttpParams().set('country', 'us');
+    let headers = new HttpHeaders().set('X-Api-Key', this.apiKey);
+    return this.http.get(this.url+this.endPoint, {params, headers});
   }
 
 }
