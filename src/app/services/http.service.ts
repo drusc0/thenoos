@@ -19,9 +19,15 @@ export class HttpService {
 
   getTopHeadlines() {
     this.endPoint = "top-headlines";
-    let params = new HttpParams().set('country', 'us');
     let headers = new HttpHeaders().set('X-Api-Key', this.apiKey);
+    let params = new HttpParams().set('country', 'us');
     return this.http.get(this.url+this.endPoint, {params, headers});
   }
 
+  getSources() {
+    this.endPoint = "sources";
+    let headers = new HttpHeaders().set('X-Api-Key', this.apiKey);
+    let params = new HttpParams().set('country', 'us');
+    return this.http.get(this.url+this.endPoint, {params, headers});
+  }
 }
