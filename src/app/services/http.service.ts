@@ -24,10 +24,19 @@ export class HttpService {
     return this.http.get(this.url+this.endPoint, {params, headers});
   }
 
-  getSources() {
+  getSources(filters) {
     this.endPoint = "sources";
     let headers = new HttpHeaders().set('X-Api-Key', this.apiKey);
-    let params = new HttpParams().set('country', 'us');
+    let params = new HttpParams();
+    if( filters.language && filters.language != "" ) {
+      params = params.append('language', filters.language);
+    }
+    if( filters.country && filters.country != "" ) {
+      params = params.append('country', filters.country);
+    }
+    if( filters.category && filters.category != "" ) {
+      params = params.append('category', filters.category);
+    }
     return this.http.get(this.url+this.endPoint, {params, headers});
   }
 }

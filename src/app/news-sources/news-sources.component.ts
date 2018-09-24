@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 
 @Component({
@@ -10,12 +11,19 @@ export class NewsSourcesComponent implements OnInit {
 
   inProgress:boolean = true;
   sourcesData: Object = null;
+  form:FormGroup;
   page: number = 1
 
-  constructor(private http:HttpService) { }
+  constructor(private http:HttpService, private fb:FormBuilder) {
+    this.createForm();
+  }
 
   ngOnInit() {
-    this.http.getSources()
+    this.request({});
+  }
+
+  request(filters:Object) {
+    return this.http.getSources(filters)
       .subscribe(
         data => {
           this.sourcesData = data;
@@ -24,6 +32,18 @@ export class NewsSourcesComponent implements OnInit {
         err => console.log(err),
         () => this.inProgress = false
       );
+  }
+
+  createForm() {
+    this.form = this.fb.group({
+      category: '',
+      lang: '',
+      country: ''
+    });
+  }
+
+  onSubmit() {
+    return this.request(this.form.value);
   }
 
 }
