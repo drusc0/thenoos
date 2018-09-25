@@ -1,0 +1,62 @@
+<div class="row" style="margin-top: 20px;">
+  <div class="col-12 d-flex justify-content-center jumbotron">
+    <h3>Sources</h3>
+  </div>
+</div>
+<hr>
+<form [formGroup]="form">
+  <div class="form-row">
+    <div class="col">
+      <label for="id-category">Category</label>
+      <input id="id-category" type="text" class="form-control" formControlName="category" placeholder="Category">
+    </div>
+    <div class="col">
+      <label for="id-country">Country</label>
+      <input id="id-country" type="text" class="form-control" formControlName="country" placeholder="Country Code">
+    </div>
+    <div class="col">
+      <label for="id-lang">Language</label>
+      <input id="id-lang" type="text" class="form-control" formControlName="lang" placeholder="Language Code">
+    </div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col d-flex justify-content-center">
+      <button class="btn btn-success" (click)="onSubmit();">Search</button>
+    </div>
+  </div>
+</form>
+<hr>
+<ng-container *ngIf="!inProgress; else loading">
+  <div *ngFor="let source of sourcesData.sources | paginate: { itemsPerPage: 10, currentPage: page }" class="row" style="margin: 10px 0;">
+    <div class="col-12">
+      
+      <div class="card text-center">
+        <div class="card-header">
+          {{source.name}}
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{source.description}}</p>
+          <a [routerLink]="['/source/', source.id]" class="btn btn-primary">Go to Source</a>
+          <a href="{{source.url}}" class="btn btn-light">Go to Site</a>
+        </div>
+        <div class="card-footer text-muted">
+          <ul class="list-inline">
+            <li class="list-inline-item">Cat: {{source.category}}</li>
+            <li class="list-inline-item">&bull;</li>
+            <li class="list-inline-item">Lang: {{source.language}}</li>
+            <li class="list-inline-item">&bull;</li>
+            <li class="list-inline-item">Country: {{source.country}}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</ng-container>
+<hr>
+<ng-template #loading>
+  <div class="row h-100 justify-content-center align-items-center">
+    <span class="fa fa-spinner fa-spin fa-5x"></span>
+  </div>
+</ng-template>
