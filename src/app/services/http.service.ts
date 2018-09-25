@@ -17,10 +17,16 @@ export class HttpService {
     return this.http.get(url);
   }
 
-  getTopHeadlines() {
+  getTopHeadlines(filters?) {
     this.endPoint = "top-headlines";
     let headers = new HttpHeaders().set('X-Api-Key', this.apiKey);
     let params = new HttpParams().set('country', 'us');
+    if( filters ) {
+      if( filters.source ) params = params.append('sources', filters.source);
+      if( filters.country ) params = params.append('country', filters.country);
+      if( filters.category ) params = params.append('category', filters.category);
+      if( filters.query ) params = params.append('q', filters.query);
+    }
     return this.http.get(this.url+this.endPoint, {params, headers});
   }
 

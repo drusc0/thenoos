@@ -15,6 +15,7 @@ import { HttpService } from './services/http.service';
 import { NotificationsService } from './services/notifications.service';
 import { ErrorTestComponent } from './error-test/error-test.component';
 import { NewsSourcesComponent } from './news-sources/news-sources.component';
+import { NewsSourceComponent } from './news-source/news-source.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: "sources",
     component: NewsSourcesComponent,
+  },
+  {
+    path: "source/:id",
+    component: NewsSourceComponent,
+    pathMatch: 'full',
   },
   {
     path: "errorTest",
@@ -43,7 +49,8 @@ const routes: Routes = [
     HomeComponent,
     ErrorsComponent,
     ErrorTestComponent,
-    NewsSourcesComponent
+    NewsSourcesComponent,
+    NewsSourceComponent,
   ],
   imports: [
     BrowserModule,

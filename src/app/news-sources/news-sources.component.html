@@ -36,7 +36,8 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{source.description}}</p>
-          <a href="{{source.url}}" class="btn btn-primary">Go to Site</a>
+          <a [routerLink]="['/source/', source.id]" class="btn btn-primary">Go to Source</a>
+          <a href="{{source.url}}" class="btn btn-light">Go to Site</a>
         </div>
         <div class="card-footer text-muted">
           <ul class="list-inline">
