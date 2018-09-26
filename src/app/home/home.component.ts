@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../services/http.service';
 
 @Component({
@@ -11,9 +12,16 @@ export class HomeComponent implements OnInit {
   inProgress: boolean = true;
   topHeadlinesData: Object = null;
 
-  constructor(private http:HttpService) { }
+  constructor(private route:ActivatedRoute, private http:HttpService) { }
 
   ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        this.request(params);
+      });
+  }
+
+  request(filters) {
     this.http.getTopHeadlines()
       .subscribe(
         data => this.topHeadlinesData = data,

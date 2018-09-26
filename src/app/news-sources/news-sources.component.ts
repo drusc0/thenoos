@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 
@@ -14,12 +15,26 @@ export class NewsSourcesComponent implements OnInit {
   form:FormGroup;
   page: number = 1
 
-  constructor(private http:HttpService, private fb:FormBuilder) {
+  constructor(
+      private activatedRoute:ActivatedRoute,
+      private router:Router, 
+      private http:HttpService, 
+      private fb:FormBuilder) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.request({});
+    this.activatedRoute.queryParams
+      .subscribe( params => {
+        this.inProgress = true;
+        let filters = {};
+        Object.keys(params).forEach( k => {
+          filters[k] = params[k];
+          this.form.patchValue( {[k]: params[k]});
+          console.log( "Form val", this.form);
+        });
+        this.request(filters);
+      });
   }
 
   request(filters:Object) {
@@ -37,13 +52,27 @@ export class NewsSourcesComponent implements OnInit {
   createForm() {
     this.form = this.fb.group({
       category: '',
-      lang: '',
+      language: '',
       country: ''
     });
   }
 
+  filterFilters(filters) {
+    let ret = {};
+    Object.keys(this.form.value).forEach( k => {
+      if( this.form.value[k] != '') ret[k] = this.form.value[k];
+    });
+    return ret;
+  }
+
+  navigate(id) {
+    let filters = this.filterFilters(this.form.value);
+    this.router.navigate(['source', id], {queryParams: filters});
+  }
+
   onSubmit() {
-    return this.request(this.form.value);
+    let filters = this.filterFilters(this.form.value);
+    this.router.navigate(['sources'], {queryParams: filters});
   }
 
 }

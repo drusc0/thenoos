@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -14,23 +14,28 @@ export class NewsSourceComponent implements OnInit {
   sourceData:Object = null;
   sourceId:string;
 
-  constructor(private http:HttpService, private route:ActivatedRoute) { }
+  constructor(
+      private activatedRoute:ActivatedRoute, 
+      private router:Router,
+      private http:HttpService) { }
 
   ngOnInit() {
-    this.route.params
+    this.activatedRoute.queryParams
       .subscribe( params => {
-        this.sourceId = params['id'];
-        this.http.getTopHeadlines({'sources': this.sourceId})
-          .subscribe(data => {
-            console.log("Data", data),
-            this.sourceData = data;
-          },
-          err => {
-            console.error(err)
-          },
-          () => this.inProgress = false
-        )
-      });
+        this.inProgress = true;
+        let filters = {};
+        Object.keys(params).forEach( k => filters[k] = params[k]);
+        this.request(filters);
+    });
+  }
+
+  request(filters) {
+    this.http.getTopHeadlines(filters)
+      .subscribe(
+        data => this.sourceData = data,
+        err => console.error(err),
+        () => this.inProgress = false
+    );
   }
 
 }

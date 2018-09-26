@@ -16,7 +16,7 @@
     </div>
     <div class="col">
       <label for="id-lang">Language</label>
-      <input id="id-lang" type="text" class="form-control" formControlName="lang" placeholder="Language Code">
+      <input id="id-lang" type="text" class="form-control" formControlName="language" placeholder="Language Code">
     </div>
   </div>
   <div class="row" style="margin-top: 10px;">
@@ -36,16 +36,35 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{source.description}}</p>
-          <a [routerLink]="['/source/', source.id]" class="btn btn-primary">Go to Source</a>
+          <a [routerLink]="['/source/', source.id]"
+              queryParamsHandling="merge"
+              class="btn btn-primary">
+              Go to Source
+          </a>
           <a href="{{source.url}}" class="btn btn-light">Go to Site</a>
         </div>
         <div class="card-footer text-muted">
           <ul class="list-inline">
-            <li class="list-inline-item">Cat: {{source.category}}</li>
+            <li class="list-inline-item"> 
+              <a [routerLink]="['/source/', source.id]" 
+                  [queryParams]="{category: source.category}">
+                  Cat: {{source.category}}
+              </a>
+            </li>
             <li class="list-inline-item">&bull;</li>
-            <li class="list-inline-item">Lang: {{source.language}}</li>
+            <li class="list-inline-item">
+              <a [routerLink]="['/source/', source.id]" 
+                  [queryParams]="{category: source.language}">
+                  Lang: {{source.language}}
+              </a>
+            </li>
             <li class="list-inline-item">&bull;</li>
-            <li class="list-inline-item">Country: {{source.country}}</li>
+            <li class="list-inline-item">
+              <a [routerLink]="['/source/', source.id]" 
+                [queryParams]="{category: source.country}">
+                Country: {{source.country}}
+              </a>
+            </li>
           </ul>
         </div>
       </div>
