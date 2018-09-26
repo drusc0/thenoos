@@ -36,7 +36,8 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{source.description}}</p>
-          <a (click)="navigate(source.id);" [routerLink]="['/source/', source.id]" 
+          <a [routerLink]="['/source/', source.id]"
+              queryParamsHandling="merge"
               class="btn btn-primary">
               Go to Source
           </a>

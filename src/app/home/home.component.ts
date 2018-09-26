@@ -17,9 +17,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        console.log("router", this.route);
-        console.log("params", this.route.params);
-        console.log("query params", params);
         this.request(params);
       });
   }
