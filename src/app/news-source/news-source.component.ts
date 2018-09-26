@@ -15,7 +15,7 @@ export class NewsSourceComponent implements OnInit {
   sourceId:string;
   snapshot;
 
-  constructor(private http:HttpService, private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute, private http:HttpService) { }
 
   ngOnInit() {
     this.snapshot = this.route.snapshot;
