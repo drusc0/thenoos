@@ -13,24 +13,28 @@ export class NewsSourceComponent implements OnInit {
   inProgress:boolean = true;
   sourceData:Object = null;
   sourceId:string;
+  snapshot;
 
   constructor(private http:HttpService, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params
-      .subscribe( params => {
-        this.sourceId = params['id'];
-        this.http.getTopHeadlines({'sources': this.sourceId})
-          .subscribe(data => {
-            console.log("Data", data),
-            this.sourceData = data;
-          },
-          err => {
-            console.error(err)
-          },
-          () => this.inProgress = false
-        )
-      });
+    this.snapshot = this.route.snapshot;
+    let filters = {};
+    Object.keys(this.snapshot.queryParams).forEach( k => filters[k] = this.snapshot.queryParams[k]);
+    filters['sources'] = this.snapshot.params['id'];
+    console.log("Filters", filters);
+    this.request(filters);
+  }
+
+  request(filters) {
+    this.http.getTopHeadlines(filters)
+      .subscribe(data => {
+        console.log("Data", data),
+        this.sourceData = data;
+      },
+      err => console.error(err),
+      () => this.inProgress = false
+    );
   }
 
 }
