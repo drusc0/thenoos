@@ -10,5 +10,18 @@
 </head>
 <body class="d-flex flex-column">
   <app-root></app-root>
+  <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCMqo2ux13zHvD69Fa-I_0Y6ZrMTXm9RNc",
+      authDomain: "the-noos.firebaseapp.com",
+      databaseURL: "https://the-noos.firebaseio.com",
+      projectId: "the-noos",
+      storageBucket: "the-noos.appspot.com",
+      messagingSenderId: "872384637535"
+    };
+    firebase.initializeApp(config);
+  </script>
 </body>
 </html>
