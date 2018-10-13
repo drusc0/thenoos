@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -58,6 +59,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    NgbModule,
   ],
   providers: [
     HttpService,
