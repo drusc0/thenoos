@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   request(filters) {
-    this.http.getTopHeadlines()
+    this.http.getTopHeadlines(filters)
       .subscribe(
         data => this.topHeadlinesData = data,
         err => console.log(err),

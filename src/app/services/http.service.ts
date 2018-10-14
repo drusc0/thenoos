@@ -25,7 +25,7 @@ export class HttpService {
       if( filters.source ) params = params.append('sources', filters.source);
       if( filters.country ) params = params.append('country', filters.country);
       if( filters.category ) params = params.append('category', filters.category);
-      if( filters.query ) params = params.append('q', filters.query);
+      if( filters.q ) params = params.append('q', filters.q);
     }
     return this.http.get(this.url+this.endPoint, {params, headers});
   }
