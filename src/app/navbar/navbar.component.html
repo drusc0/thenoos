@@ -18,7 +18,8 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" 
+          aria-label="Search" (keydown.enter)="onKeydown($event)">
     </ul>
   </div>
 </nav>
